@@ -9,12 +9,11 @@ const catsArr = [
 ]
 
 let wrapperArr = []
-let clicks = 0;
-$('#clicks').text(clicks);
 
 for (const cat of catsArr) {
 	let wrapper = `<div class="wrapper">
                     <p class="name"> ${cat.name} </p>
+                    <span class="clicks"></span>
                     <img src="img/${cat.img}.jpg" class="img">
                   </div>`;
   wrapperArr.push(wrapper);
@@ -23,8 +22,10 @@ for (const cat of catsArr) {
 $('#content').append(wrapperArr);
 
 $('.wrapper').each(function(index, el) {
+	let clicks = 0;
 	$(this).on("click", function(){
-    clicks ++;
-    $('#clicks').text(clicks);
+		clicks ++;
+		console.log($(this).children('.clicks'));
+		$(this).children('.clicks').text(clicks);
    });
 });
