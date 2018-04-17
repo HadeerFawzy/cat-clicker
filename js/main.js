@@ -41,8 +41,12 @@ $('#content').append(wrapperArr);
 
 $('.wrapper').each(function(index, el) {
   let clicks = 0;
-	$(this).on("click", function(){
+	$(this).children('.img').on("click", function(){
     clicks ++;
-    $(this).children('.clicks').text(clicks);
+    $(this).prev('.clicks').text(clicks);
+   });
+  $(this).children('.name').on("click", function(){
+    let parentWrapper = $(this).parent().clone();
+    $('#selected-cat').html(parentWrapper);                    
    });
 });
