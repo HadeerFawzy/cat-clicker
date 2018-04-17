@@ -5,7 +5,25 @@ const catsArr = [
 	},{
 		name: 'second cat',
 		img: 'cat_2'
-	}
+	},{
+    name: 'third cat',
+    img: 'cat_3'
+  },{
+    name: 'forth cat',
+    img: 'cat_4'
+  },{
+    name: 'fifth cat',
+    img: 'cat_5'
+  },{
+    name: 'sixth cat',
+    img: 'cat_6'
+  },{
+    name: 'seven cat',
+    img: 'cat_7'
+  },{
+    name: 'eighth cat',
+    img: 'cat_8'
+  }
 ]
 
 let wrapperArr = []
