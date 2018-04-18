@@ -1,3 +1,21 @@
+// $(function(){
+
+//   var modal = {
+//     selectedCat:  
+//   };
+
+//   var octopus = {
+
+//   };
+
+//   var view = {
+
+//   };
+
+//   octopus.init();
+
+// });
+
 const catsArr = [
 	{
 		name: 'first cat',

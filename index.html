@@ -21,9 +21,14 @@
         <div id="content">
 
         </div>
-        <div id="selected-cat" class="selected-cat">
-            
-        </div>
+
+        <script type="text/template" data-template="selected-cat">
+            <div id="selected-cat" class="selected-cat">
+                <p class="name">{{name}}</p>
+                <span class="clicks">{{clicks}}</span>
+                <img src="img/" class="img">
+            </div>
+        </script>
 
         <script src="js/vendor/jquery-1.11.2.min.js"></script>
         <script src="js/plugins.js"></script>
