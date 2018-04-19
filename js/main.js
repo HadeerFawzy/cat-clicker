@@ -46,7 +46,7 @@ $(function(){
   var octopus = {
   	init: function(){
       // set the selected cat to the first one
-      modal.selectedCat = modal.cats[0];
+      modal.selectedCat = modal.cat[0];
       // call the views
       selectedCatView.init();
       catListView.init();
@@ -62,7 +62,7 @@ $(function(){
     // set the selected cats to the one argument sent to the setter function
     setSelectedCat: function (cat){
       modal.selectedCat = cat;
-    }
+    },
     // increase clicks for cat
     increaseClick: function(){
       modal.selectedCat.clicks ++;
@@ -80,7 +80,9 @@ $(function(){
   };
 
   var catListView = {
-
+    init: function(){
+      
+    }
   };
 
   octopus.init();
