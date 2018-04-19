@@ -45,15 +45,37 @@ $(function(){
 
   var octopus = {
   	init: function(){
-
-  	}
+      // set the selected cat to the first one
+      modal.selectedCat = modal.cats[0];
+      // call the views
+      selectedCatView.init();
+      catListView.init();
+  	},
+    // get the list of the cats
+    getCats: function (){
+      return modal.cats;
+    },
+    // get the selected cat
+    getSelectedCat: function (){
+      return modal.selectedCat;
+    },
+    // set the selected cats to the one argument sent to the setter function
+    setSelectedCat: function (cat){
+      modal.selectedCat = cat;
+    }
+    // increase clicks for cat
+    increaseClick: function(){
+      modal.selectedCat.clicks ++;
+      // render both views to increase th click at the list and the selected cat
+      catListView.render();
+      selectedCatView.render();
+    }
   };
 
   var selectedCatView = {
   	init: function(){
 	  	// grab elements and html for using in the render function
 	    this.selectedCatTemplate = $("script[data-template ='selected-cat']").html();
-
     }
   };
 
