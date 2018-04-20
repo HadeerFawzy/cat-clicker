@@ -5,7 +5,7 @@ $(function(){
     selectedCat: null,
 
     // store all the cats data
-    cat: [
+    cats: [
 	    {
 				name: 'first cat',
 				img: 'img/cat_1.jpg',
@@ -46,7 +46,7 @@ $(function(){
   var octopus = {
   	init: function(){
       // set the selected cat to the first one
-      modal.selectedCat = modal.cat[0];
+      modal.selectedCat = modal.cats[0];
       // call the views
       selectedCatView.init();
       catListView.init();
@@ -66,10 +66,10 @@ $(function(){
     // increase clicks for cat
     increaseClick: function(){
       modal.selectedCat.clicks ++;
-      console.log(modal.selectedCat.clicks);
+      // console.log(modal.selectedCat.clicks);
       // render both views to increase th click at the list and the selected cat
-      // catListView.render();
       selectedCatView.render();
+      catListView.render();
     }
   };
 
@@ -101,6 +101,34 @@ $(function(){
 
   var catListView = {
     init: function(){
+      this.catListWrapper = $('#cats-list');
+      // console.log(this.catListWrapper);
+      this.render();
+    },
+
+    render: function(){
+      var allCats = octopus.getCats();
+      // console.log(allCats);
+      this.catListWrapper.html('');
+
+      allCats.forEach((cat, index) => {
+        let wrapper = `<div class="wrapper" data-index=${index}>
+                          <p class="name"> ${cat.name} </p>
+                          <span class="clicks">${cat.clicks}</span>
+                          <img src="${cat.img}" class="img">
+                        </div>`;
+        this.catListWrapper.append(wrapper);  
+      });  
+
+      // add click function to cats
+      $('.wrapper').on("click", function(){
+        var catObjectIndex = $(this).attr("data-index");
+        // console.log(catObjectIndex);
+        // console.log(allCats[catObjectIndex]);
+        octopus.setSelectedCat(allCats[catObjectIndex]);
+        selectedCatView.render();
+      });
+
 
     }
   };
@@ -108,3 +136,4 @@ $(function(){
   octopus.init();
 
 });
+
