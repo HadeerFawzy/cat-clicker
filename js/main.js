@@ -14,7 +14,7 @@ $(function(){
 				img: 'img/cat_1.jpg',
 				clicks: 0
 			},{
-				name: 'second cat',
+				name: 'scnd cat',
 				img: 'img/cat_2.jpg',
 				clicks: 0
 			},{
@@ -64,7 +64,7 @@ $(function(){
       return modal.selectedCat;
     },
     // set the selected cats to the one argument sent to the setter function
-    setSelectedCat: function (cat){
+    setSelectedCat: function (cat,){
       modal.selectedCat = cat;
     },
     // increase clicks for cat
@@ -73,6 +73,7 @@ $(function(){
       // render both views to increase th click at the list and the selected cat
       selectedCatView.render();
       catListView.render();
+      adminPanel.render();
     },
 
     setAdminView: function(boolean){
@@ -94,14 +95,18 @@ $(function(){
       // add click event to img
       this.selectedCatTemplate.children('.img').on("click", function(){
         octopus.increaseClick();
+
       });
 
       // call render to update the selected cat at the view
-      this.render();
+      // path 0 here as an index cause this is the first time to render the selected cat view
+      this.render(0);
     },
 
-    render: function(){
+    render: function(index){
       var selectedCat = octopus.getSelectedCat();
+
+      this.selectedCatTemplate.attr( 'data-index', index);
       this.selectedCatTemplate.children('.name').text(selectedCat.name);
       this.selectedCatTemplate.children('.img').attr( 'src', selectedCat.img);
       this.selectedCatTemplate.children('.clicks').text(selectedCat.clicks);
@@ -131,7 +136,9 @@ $(function(){
       $('.wrapper').on("click", function(){
         var catObjectIndex = $(this).attr("data-index");
         octopus.setSelectedCat(allCats[catObjectIndex]);
-        selectedCatView.render();
+        selectedCatView.render([catObjectIndex]);
+        adminPanel.init();
+        adminPanel.render();
       });
     }
   };
@@ -151,7 +158,16 @@ $(function(){
       });
 
       $('#save-btn').on("click", function(){
-        // octopus.setSelectedCat(cat);
+        var selectedCatIndex = $('#selected-cat').attr('data-index');
+        var newCat = {};
+        newCat.name = $('#name').val();
+        newCat.img = $('#url').val();
+        newCat.clicks = $('#clicks').val();
+        
+        modal.cats[selectedCatIndex] = newCat;
+        octopus.setSelectedCat(newCat);
+        catListView.render();
+        selectedCatView.render();
       });
 
       this.render();
@@ -159,14 +175,24 @@ $(function(){
 
     render: function(){
       var boolean = octopus.getAdminView();
-      if (boolean) {
-        this.adminPanelHtml.show();
-      }else if(!boolean){
-        this.adminPanelHtml.hide();
-      }
+
+      // function to toggle the  view
+      (function adminViewContent(){
+        $('#name').val(octopus.getSelectedCat().name);
+        $('#url').val(octopus.getSelectedCat().img);
+        $('#clicks').val(octopus.getSelectedCat().clicks);
+      })();
+
+      // function to toggle the  view
+      (function toggleAdminView(){
+        if (boolean) {
+          adminPanel.adminPanelHtml.show();
+        }else if(!boolean){
+          adminPanel.adminPanelHtml.hide();
+        }
+      })();
     }
   }
-
 
   octopus.init();
 

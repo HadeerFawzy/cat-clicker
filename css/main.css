@@ -96,6 +96,7 @@ textarea {
 .wrapper .img {
   width: 100%;
   cursor: pointer;
+  height: 120px;
 }
 
 .selected-cat {
