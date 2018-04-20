@@ -8,35 +8,35 @@ $(function(){
     cat: [
 	    {
 				name: 'first cat',
-				imgSrc: 'cat_1.jpg',
+				img: 'img/cat_1.jpg',
 				clicks: 0
 			},{
 				name: 'second cat',
-				imgSrc: 'cat_2',
+				img: 'img/cat_2.jpg',
 				clicks: 0
 			},{
 		    name: 'third cat',
-		    imgSrc: 'cat_3',
+		    img: 'img/cat_3.jpg',
 				clicks: 0
 		  },{
 		    name: 'forth cat',
-		    imgSrc: 'cat_4',
+		    img: 'img/cat_4.jpg',
 				clicks: 0
 		  },{
 		    name: 'fifth cat',
-		    imgSrc: 'cat_5',
+		    img: 'img/cat_5.jpg',
 				clicks: 0
 		  },{
 		    name: 'sixth cat',
-		    imgSrc: 'cat_6',
+		    img: 'img/cat_6.jpg',
 				clicks: 0
 		  },{
 		    name: 'seven cat',
-		    imgSrc: 'cat_7',
+		    img: 'img/cat_7.jpg',
 				clicks: 0
 		  },{
 		    name: 'eighth cat',
-		    imgSrc: 'cat_8',
+		    img: 'img/cat_8.jpg',
 				clicks: 0
 		  }
 
@@ -66,8 +66,9 @@ $(function(){
     // increase clicks for cat
     increaseClick: function(){
       modal.selectedCat.clicks ++;
+      console.log(modal.selectedCat.clicks);
       // render both views to increase th click at the list and the selected cat
-      catListView.render();
+      // catListView.render();
       selectedCatView.render();
     }
   };
@@ -75,66 +76,35 @@ $(function(){
   var selectedCatView = {
   	init: function(){
 	  	// grab elements and html for using in the render function
-	    this.selectedCatTemplate = $("script[data-template ='selected-cat']").html();
+	    this.selectedCatTemplate = $("#selected-cat");
+      // console.log(selectedCatTemplate);
+
+      // add click event to img
+      this.selectedCatTemplate.children('.img').on("click", function(){
+        octopus.increaseClick();
+        // console.log(octopus.getSelectedCat().clicks);
+      });
+
+      // call render to update the selected cat at the view
+      this.render();
+    },
+
+    render: function(){
+      var selectedCat = octopus.getSelectedCat();
+      // console.log(selectedCat);
+      // console.log(this.selectedCatTemplate);
+      this.selectedCatTemplate.children('.name').text(selectedCat.name);
+      this.selectedCatTemplate.children('.img').attr( 'src', selectedCat.img);
+      this.selectedCatTemplate.children('.clicks').text(selectedCat.clicks);
     }
   };
 
   var catListView = {
     init: function(){
-      
+
     }
   };
 
   octopus.init();
 
-});
-
-const catsArr = [
-	{
-		name: 'first cat',
-		img: 'cat_1'
-	},{
-		name: 'second cat',
-		img: 'cat_2'
-	},{
-    name: 'third cat',
-    img: 'cat_3'
-  },{
-    name: 'forth cat',
-    img: 'cat_4'
-  },{
-    name: 'fifth cat',
-    img: 'cat_5'
-  },{
-    name: 'sixth cat',
-    img: 'cat_6'
-  },{
-    name: 'seven cat',
-    img: 'cat_7'
-  },{
-    name: 'eighth cat',
-    img: 'cat_8'
-  }
-]
-
-let wrapperArr = []
-
-for (const cat of catsArr) {
-	let wrapper = `<div class="wrapper">
-                    <p class="name"> ${cat.name} </p>
-                    <span class="clicks"></span>
-                    <img src="img/${cat.img}.jpg" class="img">
-                  </div>`;
-  wrapperArr.push(wrapper);
-}
-
-$('#content').append(wrapperArr);
-
-$('.wrapper').each(function(index, el) {
-	let clicks = 0;
-	$(this).on("click", function(){
-		clicks ++;
-		console.log($(this).children('.clicks'));
-		$(this).children('.clicks').text(clicks);
-   });
 });
