@@ -1,35 +1,55 @@
 <!doctype html>
 <html class="no-js" lang="">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-        <link rel="stylesheet" href="css/normalize.min.css">
-        <link rel="stylesheet" href="css/main.css">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="stylesheet" href="css/normalize.min.css">
+  <link rel="stylesheet" href="css/main.css">
+  <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
 
-        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
-    </head>
-    <body>
-        <!--[if lt IE 8]>
+<body>
+  <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
+  <div id="cats-list">
+  </div>
+  <div class="wrap-cat-btn">
+    <div id="selected-cat" class="selected-cat">
+      <p class="name"></p>
+      <span class="clicks"></span>
+      <img src="" class="img">
+    </div>
+    <button class="edit-btn" id="edit-btn">
+      Edit
+    </button>
+  </div>
+  <div class="admin-area" id="admin-area">
+    <div class="wrap-inputs">
+      <label for="name">Name:</label>
+      <input type="text" id="fname" name="firstname" placeholder="Cat name..">
+      <label for="url">URL:</label>
+      <input type="text" id="lname" name="lastname" placeholder="Cat image url..">
+      <label for="click">Clicks:</label>
+      <input type="text" id="lname" name="lastname" placeholder="Number of clicks..">
+    </div>
+    <div class="wrap-btns">
+      <button class="cancel-btn">
+        Cancel
+      </button>
+      <button class="save-btn">
+        Save
+      </button>
+    </div>
+  </div>
+  <script src="js/vendor/jquery-1.11.2.min.js"></script>
+  <script src="js/plugins.js"></script>
+  <script src="js/main.js"></script>
+</body>
 
-        <div id="cats-list">
-
-        </div>
-
-        <div id="selected-cat" class="selected-cat">
-            <p class="name"></p>
-            <span class="clicks"></span>
-            <img src="" class="img">
-        </div>
-
-        <script src="js/vendor/jquery-1.11.2.min.js"></script>
-        <script src="js/plugins.js"></script>
-        <script src="js/main.js"></script>
-    </body>
 </html>
