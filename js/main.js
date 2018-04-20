@@ -66,7 +66,6 @@ $(function(){
     // increase clicks for cat
     increaseClick: function(){
       modal.selectedCat.clicks ++;
-      // console.log(modal.selectedCat.clicks);
       // render both views to increase th click at the list and the selected cat
       selectedCatView.render();
       catListView.render();
@@ -77,12 +76,10 @@ $(function(){
   	init: function(){
 	  	// grab elements and html for using in the render function
 	    this.selectedCatTemplate = $("#selected-cat");
-      // console.log(selectedCatTemplate);
 
       // add click event to img
       this.selectedCatTemplate.children('.img').on("click", function(){
         octopus.increaseClick();
-        // console.log(octopus.getSelectedCat().clicks);
       });
 
       // call render to update the selected cat at the view
@@ -91,8 +88,6 @@ $(function(){
 
     render: function(){
       var selectedCat = octopus.getSelectedCat();
-      // console.log(selectedCat);
-      // console.log(this.selectedCatTemplate);
       this.selectedCatTemplate.children('.name').text(selectedCat.name);
       this.selectedCatTemplate.children('.img').attr( 'src', selectedCat.img);
       this.selectedCatTemplate.children('.clicks').text(selectedCat.clicks);
@@ -102,13 +97,11 @@ $(function(){
   var catListView = {
     init: function(){
       this.catListWrapper = $('#cats-list');
-      // console.log(this.catListWrapper);
       this.render();
     },
 
     render: function(){
       var allCats = octopus.getCats();
-      // console.log(allCats);
       this.catListWrapper.html('');
 
       allCats.forEach((cat, index) => {
@@ -123,8 +116,6 @@ $(function(){
       // add click function to cats
       $('.wrapper').on("click", function(){
         var catObjectIndex = $(this).attr("data-index");
-        // console.log(catObjectIndex);
-        // console.log(allCats[catObjectIndex]);
         octopus.setSelectedCat(allCats[catObjectIndex]);
         selectedCatView.render();
       });
