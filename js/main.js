@@ -4,6 +4,9 @@ $(function(){
   	// declare the selected cat
     selectedCat: null,
 
+    // boolean for admin view
+    adminView: false,
+
     // store all the cats data
     cats: [
 	    {
@@ -50,6 +53,7 @@ $(function(){
       // call the views
       selectedCatView.init();
       catListView.init();
+      adminPanel.init();
   	},
     // get the list of the cats
     getCats: function (){
@@ -69,7 +73,17 @@ $(function(){
       // render both views to increase th click at the list and the selected cat
       selectedCatView.render();
       catListView.render();
+    },
+
+    setAdminView: function(boolean){
+      modal.adminView = boolean;
+    },
+
+    // render admin view if modal.adminView is true
+    getAdminView: function (){
+      return modal.adminView;
     }
+
   };
 
   var selectedCatView = {
@@ -119,10 +133,40 @@ $(function(){
         octopus.setSelectedCat(allCats[catObjectIndex]);
         selectedCatView.render();
       });
-
-
     }
   };
+
+  var adminPanel = {
+    init:  function(){
+      this.adminPanelHtml = $('#admin-area');
+
+      $('#cancel-btn').on("click", function(){
+        octopus.setAdminView(false);
+        adminPanel.render();
+      });
+
+      $('#edit-btn').on("click", function(){
+        octopus.setAdminView(true);
+        adminPanel.render();
+      });
+
+      $('#save-btn').on("click", function(){
+        // octopus.setSelectedCat(cat);
+      });
+
+      this.render();
+    },
+
+    render: function(){
+      var boolean = octopus.getAdminView();
+      if (boolean) {
+        this.adminPanelHtml.show();
+      }else if(!boolean){
+        this.adminPanelHtml.hide();
+      }
+    }
+  }
+
 
   octopus.init();
 
